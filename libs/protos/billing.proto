@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package vap.billing;
+
+option go_package = "github.com/vap-platform/protos/billing";
+
+import "common.proto";
+
+// Billing service internal API
+
+service BillingInternal {
+  // Request a lease for a call (reserve credits)
+  rpc RequestLease(LeaseRequest) returns (LeaseResponse);
+  
+  // Renew an existing lease (heartbeat)
+  rpc RenewLease(RenewLeaseRequest) returns (LeaseResponse);
+  
+  // Release a lease (call ended)
+  rpc ReleaseLease(ReleaseLeaseRequest) returns (ReleaseLeaseResponse);
+}
+
+message LeaseRequest {
+  string org_id = 1;
+  string call_id = 2;
+  int32 duration_seconds = 3; // How long to reserve
+  int32 cost_per_minute_cents = 4;
+}
+
+message LeaseResponse {
+  bool success = 1;
+  string lease_token = 2;
+  int64 expires_at = 3;
+  int32 reserved_cents = 4;
+  string error_code = 5;
+}
+
+message RenewLeaseRequest {
+  string lease_token = 1;
+  string call_id = 2;
+  int32 actual_duration_seconds = 3;
+}
+
+message ReleaseLeaseRequest {
+  string lease_token = 1;
+  string call_id = 2;
+  int32 final_duration_seconds = 3;
+  int32 final_cost_cents = 4;
+}
+
+message ReleaseLeaseResponse {
+  bool success = 1;
+  int32 charged_cents = 2;
+  int32 remaining_balance_cents = 3;
+}

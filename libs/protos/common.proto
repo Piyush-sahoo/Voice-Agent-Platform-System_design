@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package vap.common;
+
+option go_package = "github.com/vap-platform/protos/common";
+
+// Common message types used across services
+
+message Timestamp {
+  int64 seconds = 1;
+  int32 nanos = 2;
+}
+
+message Pagination {
+  int32 page = 1;
+  int32 limit = 2;
+  string cursor = 3;
+}
+
+message PaginatedResponse {
+  int32 total = 1;
+  int32 page = 2;
+  int32 limit = 3;
+  bool has_more = 4;
+  string next_cursor = 5;
+}
+
+message Error {
+  string code = 1;
+  string message = 2;
+  map<string, string> details = 3;
+}
