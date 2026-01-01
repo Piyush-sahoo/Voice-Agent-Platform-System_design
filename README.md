@@ -1,4 +1,4 @@
-# 🎙️ VAP Platform - Voice AI Platform
+# 🎙️ VAP System Design
 
 A **production-ready** Voice AI Platform that can handle **2 million calls per day**. Built like [VAPI](https://vapi.ai) or [Retell AI](https://retellai.com).
 
