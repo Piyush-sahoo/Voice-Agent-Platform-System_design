@@ -1009,3 +1009,7 @@ This platform is production-ready because:
 5. Set up monitoring with Grafana
 
 Happy building! 🚀
+
+---
+
+<p align="center">Made with ❤️ by Piyush</p>
